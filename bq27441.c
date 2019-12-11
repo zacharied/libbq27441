@@ -1,8 +1,15 @@
 #include "bq27441.h"
 #include <stdlib.h>
 
+// Used to convert between uint16_t and status_t.
 union bq27441_status_int {
     bq27441_status_t status;
+    uint16_t integer;
+};
+
+// Used to convert between uint16_t and flags_t.
+union bq27441_flags_int {
+    bq27441_flags_t flags;
     uint16_t integer;
 };
 
@@ -88,7 +95,10 @@ uint16_t bq27441_temperature(void) {
     return i2c_smbus_read_word_data(bq27441_file, BQ27441_COMMAND_TEMPERATURE);
 }
 
-// TODO Flags()
+bq27441_flags_t bq27441_flags(void) {
+    // TODO Make sure this works.
+    return ((union bq27441_flags_t)(uint16_t)i2c_smbus_read_word_data(bq27441_file, BQ27441_COMMAND_FLAGS)).flags;
+}
 
 uint16_t bq27441_voltage(void) {
     return i2c_smbus_read_word_data(bq27441_file, BQ27441_COMMAND_VOLTAGE);

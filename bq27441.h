@@ -100,6 +100,23 @@ typedef struct {
     unsigned int _reserved_1 : 1;
 } bq27441_status_t;
 
+typedef struct {
+    unsigned int over_temperature : 1;
+    unsigned int under_temperature : 1;
+    unsigned int _reserved_0 : 4;
+    unsigned int full_charge : 1;
+    unsigned int fast_charging_allowed : 1;
+
+    unsigned int ocv_measurement_taken : 1;
+    unsigned int _reserved_1 : 1;
+    unsigned int reset_occurred : 1;
+    unsigned int config_update_mode : 1;
+    unsigned int battery_insertion_detected : 1;
+    unsigned int soc1 : 1;
+    unsigned int socf : 1;
+    unsigned int discharging : 1;
+} bq27441_flags_t;
+
 int bq27441_init(unsigned int bus_id);
 
 /* Control subcommands. */
