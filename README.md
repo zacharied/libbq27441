@@ -8,7 +8,8 @@ a connected LiPo battery.
 ## Installation
 
 With the I2C headers and libraries installed on your machine, simply run `make`. Then, run `make install` as root to
-copy the headers and shared objects to their directories in `/usr/local`.
+copy the headers and shared objects to their directories in `/usr/local`. The `PREFIX` environment variable may be
+specified to override the installation directory.
 
 ## Usage
 

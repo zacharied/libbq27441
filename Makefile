@@ -12,6 +12,8 @@ HEADERS = bq27441.h
 LINK_DEPS = -li2c
 TESTER_DEPS = -lbq27441
 
+PREFIX ?= /usr/local
+
 lib:
 	$(CC) $(LINK_DEPS) $(CFLAGS) $(CFLAGS_LIB) $(SOURCES) -o $(SO_NAME)
 
@@ -21,9 +23,9 @@ tester: lib
 	@LD_LIBRARY_PATH=$(shell pwd) ./$(TESTER_NAME)
 
 install: lib
-	cp $(SO_NAME) /usr/local/lib
-	cp $(HEADERS) /usr/local/include
+	cp $(SO_NAME) $(PREFIX)/lib
+	cp $(HEADERS) $(PREFIX)/include
 
 uninstall:
-	rm /usr/local/lib/$(SO_NAME)
-	rm $(addprefix /usr/local/include/, $(HEADERS))
+	rm $(PREFIX)/lib/$(SO_NAME)
+	rm $(addprefix $(PREFIX)/include/, $(HEADERS))
