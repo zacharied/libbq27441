@@ -128,7 +128,7 @@ uint16_t bq27441_prev_macwrite(void);
 uint16_t bq27441_chem_id(void);
 uint16_t bq27441_temperature(void);
 uint16_t bq27441_voltage(void);
-uint16_t bq27441_flags(void);
+bq27441_flags_t bq27441_flags(void);
 uint16_t bq27441_nominal_avail_cap(void);
 uint16_t bq27441_full_avail_cap(void);
 uint16_t bq27441_remaining_cap(void);

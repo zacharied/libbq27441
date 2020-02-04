@@ -97,7 +97,7 @@ uint16_t bq27441_temperature(void) {
 
 bq27441_flags_t bq27441_flags(void) {
     // TODO Make sure this works.
-    return ((union bq27441_flags_t)(uint16_t)i2c_smbus_read_word_data(bq27441_file, BQ27441_COMMAND_FLAGS)).flags;
+    return ((union bq27441_flags_int)(uint16_t)i2c_smbus_read_word_data(bq27441_file, BQ27441_COMMAND_FLAGS)).flags;
 }
 
 uint16_t bq27441_voltage(void) {
