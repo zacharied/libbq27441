@@ -1,8 +1,10 @@
+AR = ar
 CC = gcc
 CFLAGS = -g -Wall -Werror
-CFLAGS_LIB = -shared -fPIC
+CFLAGS_LIB = -c
 
-SO_NAME = libbq27441.so
+OBJ_NAME = libbq27441.o
+LIB_NAME = libbq27441.a
 TESTER_NAME = tester
 
 SOURCES = bq27441.c
@@ -15,17 +17,21 @@ TESTER_DEPS = -lbq27441
 PREFIX ?= /usr/local
 
 lib:
-	$(CC) $(LINK_DEPS) $(CFLAGS) $(CFLAGS_LIB) $(SOURCES) -o $(SO_NAME)
+	$(CC) $(LINK_DEPS) $(CFLAGS) $(CFLAGS_LIB) $(SOURCES) -o $(OBJ_NAME)
+	$(AR) rcs $(LIB_NAME) $(OBJ_NAME)
 
 tester: lib
-	$(CC) $(CFLAGS) $(LINK_DEPS) $(TESTER_DEPS) $(TESTER_SOURCES) $(SO_NAME) -o $(TESTER_NAME)
-	@echo 'Running tester at ./$(TESTER_NAME)'	
-	@LD_LIBRARY_PATH=$(shell pwd) ./$(TESTER_NAME)
+	$(CC) $(CFLAGS) $(LINK_DEPS) $(TESTER_SOURCES) $(LIB_NAME) -o $(TESTER_NAME)
+	@echo 'Running tester at ./$(TESTER_NAME)' || (echo "Test failed..."; exit $$?)
+	@echo 'Tests passed.'
 
 install: lib
-	cp $(SO_NAME) $(PREFIX)/lib
+	cp $(LIB_NAME) $(PREFIX)/lib
 	cp $(HEADERS) $(PREFIX)/include
 
 uninstall:
-	rm $(PREFIX)/lib/$(SO_NAME)
+	rm $(PREFIX)/lib/$(LIB_NAME)
 	rm $(addprefix $(PREFIX)/include/, $(HEADERS))
+
+clean:
+	rm $(OBJ_NAME) $(LIB_NAME) $(TESTER_NAME)

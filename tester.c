@@ -8,9 +8,11 @@ void exit_tester(void) {
     exit(1);
 }
 
-void main(void) {
+int main(int argc, const char *argv[]) {
     if (bq27441_init(1) != 0)
         exit_tester();
 
     printf("If we got here, our device ID is corect.\n");
+
+    return 0;
 }
