@@ -7,9 +7,11 @@ a connected LiPo battery.
 
 ## Installation
 
-With the I2C headers and libraries installed on your machine, simply run `make`. Then, run `make install` as root to
-copy the headers and shared objects to their directories in `/usr/local`. The `PREFIX` environment variable may be
-specified to override the installation directory.
+With the I2C headers and libraries installed on your machine, simply run `make`. Since the outputted library
+`libbq27441.a` is static, you are able to compile your program with it simply by passing it as a source to your CC
+command line and adding the proper directory as an include for the headers.  Alternatively, to install libbq27441
+system-wide, run `make install` as root to copy the headers and static objects to their directories in `/usr/local`.
+The `PREFIX` environment variable may be specified when running `make` to override the installation directory.
 
 ## Usage
 
