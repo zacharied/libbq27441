@@ -20,7 +20,7 @@ lib:
 	$(CC) $(LINK_DEPS) $(CFLAGS) $(CFLAGS_LIB) $(SOURCES) -o $(OBJ_NAME)
 	$(AR) rcs $(LIB_NAME) $(OBJ_NAME)
 
-tester: lib
+test: lib
 	$(CC) $(CFLAGS) $(LINK_DEPS) $(TESTER_SOURCES) $(LIB_NAME) -o $(TESTER_NAME)
 	@echo 'Running tester at ./$(TESTER_NAME)' || (echo "Test failed..."; exit $$?)
 	@echo 'Tests passed.'
@@ -35,3 +35,5 @@ uninstall:
 
 clean:
 	rm $(OBJ_NAME) $(LIB_NAME) $(TESTER_NAME)
+
+.PHONY: test install uninstall clean
