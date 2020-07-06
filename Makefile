@@ -34,6 +34,6 @@ uninstall:
 	rm $(addprefix $(PREFIX)/include/, $(HEADERS))
 
 clean:
-	rm $(OBJ_NAME) $(LIB_NAME) $(TESTER_NAME)
+	rm -f $(OBJ_NAME) $(LIB_NAME) $(TESTER_NAME)
 
 .PHONY: test install uninstall clean
